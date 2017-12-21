@@ -33,19 +33,19 @@ clean:
 
 PHONY=worker
 worker::
-	celery worker -A worker.task -Q celery,goodbye --concurrency 1
+	celery worker -A worker.app -Q celery,goodbye --concurrency 1
 
 beat-worker:
-	celery worker -A worker.task -Q celery,goodbye -B --concurrency 1
+	celery worker -A worker.app -Q celery,goodbye -B --concurrency 1
 
 hello-worker:
-	celery worker -A worker.task -Q celery --concurrency 1
+	celery worker -A worker.app -Q celery --concurrency 1
 
 goodbye-worker:
-	celery worker -A worker.task -Q goodbye --concurrency 1
+	celery worker -A worker.app -Q goodbye --concurrency 1
 
 beat:
-	celery beat -A worker.task -l info
+	celery beat -A worker.app -l info
 
 flower:
-	celery flower -A worker.task
+	celery flower -A worker.app
