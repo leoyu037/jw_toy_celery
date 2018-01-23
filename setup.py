@@ -8,5 +8,6 @@ setup(
         'celery',
         'flower',
         'redis',
+        'datadog',
     ],
 )

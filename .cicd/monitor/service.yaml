@@ -8,6 +8,6 @@ blueprint:
     tag-cost_center: Discovery
 environment:
   C_FORCE_ROOT: True
-  RUN_MODE: 'worker'
+  RUN_MODE: 'monitor'
   STATSD_HOST: 'dogstatsd'
-replicas: 2
+replicas: 1

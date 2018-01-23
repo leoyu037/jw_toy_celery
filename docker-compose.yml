@@ -8,28 +8,40 @@ services:
   toy-celery-worker:
     build: .
     image: jwplayer/toy-celery:local
+    volumes:
+      - .:/srv/
     environment:
       - C_FORCE_ROOT=True
       - RUN_MODE=worker
       - QUEUES=celery
+      - ENV=LOCAL
+      - STATSD_HOST=portal-forwarder-dev.longtailvideo.com
 
   toy-celery-worker2:
     build: .
     image: jwplayer/toy-celery:local
+    volumes:
+      - .:/srv/
     environment:
       - C_FORCE_ROOT=True
       - RUN_MODE=worker
       - QUEUES=goodbye
+      - ENV=LOCAL
+      - STATSD_HOST=portal-forwarder-dev.longtailvideo.com
 
   toy-celery-beat:
     build: .
     image: jwplayer/toy-celery:local
+    volumes:
+      - .:/srv/
     environment:
       - RUN_MODE=beat
 
   toy-celery-flower:
     build: .
     image: jwplayer/toy-celery:local
+    volumes:
+      - .:/srv/
     environment:
       - RUN_MODE=flower
     ports:

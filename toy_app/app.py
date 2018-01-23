@@ -3,6 +3,7 @@
 from celery import Celery
 
 from toy_app.schedule import CELERYBEAT_SCHEDULE
+from toy_app.task import DatadogTest
 
 broker_backend = 'redis://toy-celery-broker-backend:6379//0'
 app = Celery('toy_app',
@@ -14,3 +15,5 @@ app = Celery('toy_app',
 app.conf.update(
     CELERYBEAT_SCHEDULE=CELERYBEAT_SCHEDULE
 )
+
+app.tasks.register(DatadogTest())

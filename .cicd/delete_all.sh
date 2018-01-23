@@ -12,3 +12,5 @@ cicd pipeline delete `cicd_get_id toy-celery-beat`
 cicd pipeline delete `cicd_get_id toy-celery-flower`
 
 cicd pipeline delete `cicd_get_id toy-celery-worker`
+
+cicd pipeline delete `cicd_get_id toy-celery-monitor`

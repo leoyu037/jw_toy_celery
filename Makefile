@@ -51,6 +51,9 @@ beat:
 flower:
 	celery flower -A toy_app.app
 
+monitor:
+	python toy_app/monitor.py
+
 ################################################################################
 #
 #			FOR DEVELOPMENT

@@ -13,4 +13,10 @@ CELERYBEAT_SCHEDULE = {
         'schedule': timedelta(seconds=5),  # another way to specify frequency
         'options': {'queue': 'goodbye'},
     },
+
+    'cicd-datadog-test': {
+        'task': 'tasks.datadog_test',
+        'schedule': 120,
+    },
+
 }

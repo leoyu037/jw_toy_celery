@@ -8,3 +8,5 @@ cicd pipeline create --service-name toy-celery-beat --description "Toy Celery Be
 cicd pipeline create --service-name toy-celery-flower --description "Toy Celery Flower" --service .cicd/flower/service.yaml --stages .cicd/flower/stages.yaml
 
 cicd pipeline create --service-name toy-celery-worker --description "Toy Celery Worker" --service .cicd/worker/service.yaml --stages .cicd/worker/stages.yaml
+
+cicd pipeline create --service-name toy-celery-monitor --description "Toy Celery Monitor" --service .cicd/monitor/service.yaml --stages .cicd/monitor/stages.yaml

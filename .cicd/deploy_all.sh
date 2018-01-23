@@ -22,3 +22,8 @@ sed -i '' "s/latest/$1/g" .cicd/worker/service.yaml
 cicd pipeline update `cicd_get_id toy-celery-worker` --service .cicd/worker/service.yaml --stages .cicd/worker/stages.yaml
 cicd pipeline deploy `cicd_get_id toy-celery-worker`
 git checkout -- .cicd/worker/service.yaml
+
+sed -i '' "s/latest/$1/g" .cicd/monitor/service.yaml
+cicd pipeline update `cicd_get_id toy-celery-monitor` --service .cicd/monitor/service.yaml --stages .cicd/monitor/stages.yaml
+cicd pipeline deploy `cicd_get_id toy-celery-monitor`
+git checkout -- .cicd/monitor/service.yaml
