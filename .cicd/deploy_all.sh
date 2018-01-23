@@ -11,14 +11,14 @@ cicd pipeline deploy `cicd_get_id toy-celery-broker-backend`
 sed -i '' "s/latest/$1/g" .cicd/beat/service.yaml
 cicd pipeline update `cicd_get_id toy-celery-beat` --service .cicd/beat/service.yaml --stages .cicd/beat/stages.yaml
 cicd pipeline deploy `cicd_get_id toy-celery-beat`
-git checkout -- .cicd/beat/
+git checkout -- .cicd/beat/service.yaml
 
 sed -i '' "s/latest/$1/g" .cicd/flower/service.yaml
 cicd pipeline update `cicd_get_id toy-celery-flower` --service .cicd/flower/service.yaml --stages .cicd/flower/stages.yaml
 cicd pipeline deploy `cicd_get_id toy-celery-flower`
-git checkout -- .cicd/flower/
+git checkout -- .cicd/flower/service.yaml
 
 sed -i '' "s/latest/$1/g" .cicd/worker/service.yaml
 cicd pipeline update `cicd_get_id toy-celery-worker` --service .cicd/worker/service.yaml --stages .cicd/worker/stages.yaml
 cicd pipeline deploy `cicd_get_id toy-celery-worker`
-git checkout -- .cicd/worker/
+git checkout -- .cicd/worker/service.yaml
