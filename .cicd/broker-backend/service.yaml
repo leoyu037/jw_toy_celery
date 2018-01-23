@@ -1,0 +1,11 @@
+service_name: 'toy-celery-broker-backend'
+description: 'toy celery broker/backend'
+image: 'redis'
+blueprint:
+  name: noop
+  inputs:
+    tag-application: toy-celery
+    tag-cost_center: Discovery
+ports:
+  - '6379:6379'
+replicas: 1

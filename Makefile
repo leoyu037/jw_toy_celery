@@ -1,51 +1,72 @@
-ifeq ($(RUN_MODE),cowboy_mode)
-	CMD := cowboy
-else
-	ifeq ($(RUN_MODE),beat)
-		CMD := beat
-	else
-		ifeq ($(RUN_MODE),flower)
-			CMD := flower
-		else
-			ifeq ($(RUN_MODE),hello)
-				CMD := hello-worker
-			else
-				ifeq ($(RUN_MODE),goodbye)
-					CMD := goodbye-worker
-				else
-					CMD := worker
-				endif
-			endif
-		endif
-	endif
+################################################################################
+#
+#			FOR CICD
+#
+################################################################################
+
+ifndef RUN_MODE
+	RUN_MODE = noop
 endif
 
-run: $(CMD)
+ifndef QUEUES
+	queues = celery,goodbye
+else
+	queues = ${QUEUES}
+endif
 
-cowboy:
-	@echo "wooooah nelly"
+run: $(RUN_MODE)
+
+noop:
+	@echo "NO-OP"
+
+create-pipelines:
+	. .cicd/create_all.sh
+
+delete-pipelines:
+	. .cicd/delete_all.sh
+
+deploy-pipelines: require-version docker
+	docker tag jwplayer/toy-celery:local jwplayer/toy-celery:${version}
+	docker push jwplayer/toy-celery:local
+	. .cicd/deploy_all.sh ${version}
+
+require-version:
+ifndef version
+	$(error This command requires a "version" argument specified like this: "version=<version>")
+endif
+
+################################################################################
+#
+#			FOR STARTING THE APP
+#
+################################################################################
+
+worker:
+	@echo "STARTING TOY APP WORKER WITH QUEUES ${queues}" \
+		&& celery worker -A toy_app.app -Q ${queues} --concurrency 1
+
+beat:
+	celery beat -A toy_app.app -l info
+
+flower:
+	celery flower -A toy_app.app
+
+################################################################################
+#
+#			FOR DEVELOPMENT
+#
+################################################################################
+
+docker: clean
+	docker-compose build
+
+docker-compose: clean
+	docker-compose up -d
+	docker-compose logs -f -t
 
 install:
 	python setup.py install
 
 clean:
 	rm -rf *.pyc
-
-PHONY=worker
-worker::
-	celery worker -A worker.app -Q celery,goodbye --concurrency 1
-
-beat-worker:
-	celery worker -A worker.app -Q celery,goodbye -B --concurrency 1
-
-hello-worker:
-	celery worker -A worker.app -Q celery --concurrency 1
-
-goodbye-worker:
-	celery worker -A worker.app -Q goodbye --concurrency 1
-
-beat:
-	celery beat -A worker.app -l info
-
-flower:
-	celery flower -A worker.app
+	rm -rf celerybeat*

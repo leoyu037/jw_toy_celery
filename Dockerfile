@@ -15,8 +15,9 @@ WORKDIR /srv
 
 RUN /usr/bin/easy_install-2.7 pip && \
     pip install --upgrade pip && \
-    pip install celery redis flower && \
     make install
+    # pip install celery redis flower && \
+    # make install
 
 EXPOSE 8000
 

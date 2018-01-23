@@ -1,3 +1,4 @@
+.cicd/
 .git/
 docker-compose.yaml
 Dockerfile

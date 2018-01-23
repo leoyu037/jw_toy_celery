@@ -1,0 +1,16 @@
+service_name: 'toy-celery-flower'
+description: 'toy celery flower'
+image: 'jwplayer/toy-celery:latest'
+blueprint:
+  name: web
+  inputs:
+    tag-application: toy-celery
+    tag-cost_center: Discovery
+environment:
+  RUN_MODE: 'flower'
+ports:
+  - '5555:5555'
+replicas: 1
+healthcheck:
+  path: '/'
+  port: 5555

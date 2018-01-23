@@ -1,0 +1,11 @@
+service_name: 'toy-celery-beat'
+description: 'toy celery beat'
+image: 'jwplayer/toy-celery:latest'
+blueprint:
+  name: noop
+  inputs:
+    tag-application: toy-celery
+    tag-cost_center: Discovery
+environment:
+  RUN_MODE: 'beat'
+replicas: 1

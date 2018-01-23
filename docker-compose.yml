@@ -1,35 +1,37 @@
 version: '3'
 services:
+  toy-celery-broker-backend:
+    image: redis
+    ports:
+      - '6379:6379'
+
   toy-celery-worker:
     build: .
-    image: toy-celery
+    image: jwplayer/toy-celery:local
     environment:
       - C_FORCE_ROOT=True
-      - RUN_MODE=hello
+      - RUN_MODE=worker
+      - QUEUES=celery
 
   toy-celery-worker2:
     build: .
-    image: toy-celery
+    image: jwplayer/toy-celery:local
     environment:
       - C_FORCE_ROOT=True
-      - RUN_MODE=goodbye
+      - RUN_MODE=worker
+      - QUEUES=goodbye
 
   toy-celery-beat:
     build: .
-    image: toy-celery
+    image: jwplayer/toy-celery:local
     environment:
       - RUN_MODE=beat
 
   toy-celery-flower:
     build: .
-    image: toy-celery
+    image: jwplayer/toy-celery:local
     environment:
       - RUN_MODE=flower
     ports:
       - '5555:5555'
     command: sh -c 'sleep 5; make run'
-
-  toy-celery-broker-backend:
-    image: redis
-    ports:
-      - '6379:6379'
