@@ -7,4 +7,4 @@ This is a barebones celery setup. Includes:
 1. Makefile entrypoint for starting worker, beat, flower
 1. Alpine-based Dockerfile
 1. Docker Compose file to build and run the setup locally
-1. CICD pipeline configurations for broker, worker, beat, flower (`.cicd`)
+1. (JW Player specific) CICD pipeline configurations for broker, worker, beat, flower (`.cicd`)
