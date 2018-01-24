@@ -29,6 +29,17 @@ services:
       - ENV=LOCAL
       - STATSD_HOST=portal-forwarder-dev.longtailvideo.com
 
+  toy-celery-monitor:
+    build: .
+    image: jwplayer/toy-celery:local
+    volumes:
+      - .:/srv/
+    environment:
+      - C_FORCE_ROOT=True
+      - RUN_MODE=monitor
+      - ENV=LOCAL
+      - STATSD_HOST=portal-forwarder-dev.longtailvideo.com
+
   toy-celery-beat:
     build: .
     image: jwplayer/toy-celery:local

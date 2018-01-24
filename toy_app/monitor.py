@@ -5,7 +5,6 @@ import sys
 sys.path.append(os.path.realpath(os.path.join(os.path.dirname(__file__), '..')))
 
 from toy_app import dd
-from toy_app.log import logger
 
 
 def monitor(app):
@@ -13,12 +12,14 @@ def monitor(app):
     state = app.events.State(max_tasks_in_memory=500)
 
     def datadog_test_during_task(event):
+        print('during task. success:12, failed:7')
         dd.increment_counter('toy_celery.datadog_test.monitor_during_task',
             value=12, tags=['status:success'])
         dd.increment_counter('toy_celery.datadog_test.monitor_during_task',
             value=7, tags=['status:failed'])
 
     def datadog_test_after_task(event):
+        print('after task. success:13, failed:8')
         dd.increment_counter('toy_celery.datadog_test.monitor_after_task',
             value=13, tags=['status:success'])
         dd.increment_counter('toy_celery.datadog_test.monitor_after_task',
@@ -34,7 +35,7 @@ def monitor(app):
 
 
 if __name__ == '__main__':  # run monitor
-    from toy_app import app
+    from toy_app.app import app
 
-    logger.info('Starting Toy Celery monitor')
+    print('Starting Toy Celery monitor')
     monitor(app)
