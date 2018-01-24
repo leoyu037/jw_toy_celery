@@ -27,7 +27,7 @@ delete-pipelines:
 
 deploy-pipelines: require-version docker
 	docker tag jwplayer/toy-celery:local jwplayer/toy-celery:${version}
-	docker push jwplayer/toy-celery:local
+	docker push jwplayer/toy-celery:${version}
 	. .cicd/deploy_all.sh ${version}
 
 require-version:
@@ -68,5 +68,6 @@ install:
 	python setup.py install
 
 clean:
+	docker-compose down
 	rm -rf *.pyc
 	rm -rf celerybeat*
