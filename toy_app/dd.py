@@ -4,7 +4,7 @@ import os
 from datadog import DogStatsd
 
 ENV = os.environ.get('ENV', 'LOCAL')
-STATSD_HOST = os.environ.get('STATSD_HOST', 'localhost')
+STATSD_HOST = os.environ.get('DOGSTATSD_SERVICE_HOST', 'localhost')
 BASE_TAGS = ['application:toy_celery', 'env:{}'.format(ENV)]
 
 statsd = DogStatsd(host=STATSD_HOST)
