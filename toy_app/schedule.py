@@ -13,4 +13,17 @@ CELERYBEAT_SCHEDULE = {
         'schedule': timedelta(seconds=5),  # another way to specify frequency
         'options': {'queue': 'goodbye'},
     },
+
+    # Heartbeat
+    'heartbeat-every-5s': {
+        'task': 'heartbeat',
+        'schedule': 5,
+    },
+
+    # No workers servicing this queue
+    'queue-buildup': {
+        'task': 'print.goodbye',
+        'schedule': 1,
+        'options': {'queue': 'buildup'},
+    },
 }
