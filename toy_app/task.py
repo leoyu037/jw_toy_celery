@@ -1,3 +1,4 @@
+import json
 import os
 
 from celery import shared_task
@@ -18,5 +19,6 @@ def goodbye():
 def heartbeat(self):
     r = redis.StrictRedis(host='toy-celery-broker-backend', port=6379, db=0)
 
-    for queue in ['celery', 'goodbye', 'buildup']:
-        print 'Queue {} size: {}'.format(queue, r.llen(queue))
+    # Print as JSON
+    q_sizes = {q: r.llen(q) for q in ['celery', 'goodbye', 'buildup']}
+    print(json.dumps({'Queue sizes': q_sizes}, indent=3))
