@@ -5,26 +5,6 @@ services:
     ports:
       - '6379:6379'
 
-  toy-celery-worker:
-    build: .
-    image: jwplayer/toy-celery:local
-    volumes:
-      - ./:/srv/
-    environment:
-      - C_FORCE_ROOT=True
-      - RUN_MODE=worker
-      - QUEUES=celery
-
-  toy-celery-worker2:
-    build: .
-    image: jwplayer/toy-celery:local
-    volumes:
-      - ./:/srv/
-    environment:
-      - C_FORCE_ROOT=True
-      - RUN_MODE=worker
-      - QUEUES=goodbye
-
   toy-celery-beat:
     build: .
     image: jwplayer/toy-celery:local

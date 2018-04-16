@@ -57,17 +57,21 @@ flower:
 #
 ################################################################################
 
-docker: clean
+build: clean
 	docker-compose build
 
-docker-compose: clean
-	docker-compose up -d
-	docker-compose logs -f -t
+run-broker:
+	docker-compose -p toy-celery up -d
+
+run-workers:
+	docker-compose -f docker-compose-workers.yml -p toy-celery up -d
 
 install:
 	python setup.py install
 
 clean:
-	docker-compose down
+	docker-compose down || true
+	docker-compose -f docker-compose-workers.yml down || true
+	docker network prune --force
 	rm -rf *.pyc
 	rm -rf celerybeat*
