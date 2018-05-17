@@ -13,16 +13,16 @@ This is a barebones celery setup. Includes:
 
 ## Requirements
 1. Docker
-1. Docker Compose
+1. Docker Compose (preinstalled w/ Docker for Mac)
 1. (For deploying to JW Player CICD) CICD-CLI and a Dockerhub account
 
 ## Starting the application locally
 ```bash
   # Build image
-  make docker
+  make build
 
   # Start app
-  make docker-compose
+  make run-local
 ```
 
 ## Deploying to JW Player CICD

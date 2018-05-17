@@ -38,6 +38,7 @@ endif
 ################################################################################
 #
 #			FOR STARTING THE APP
+#			TODO: convert this section to a shell script
 #
 ################################################################################
 
@@ -57,10 +58,10 @@ flower:
 #
 ################################################################################
 
-docker: clean
+build: clean
 	docker-compose build
 
-docker-compose: clean
+run-local: clean
 	docker-compose up -d
 	docker-compose logs -f -t
 
