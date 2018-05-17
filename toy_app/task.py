@@ -10,7 +10,7 @@ def hello():
 
 @shared_task(name='print.goodbye')
 def goodbye():
-    print('{}: Goodbye!'.format(os.environ.get('HOSTNAME')))
+    print('{}: Goodbye Cruel World!'.format(os.environ.get('HOSTNAME')))
 
 
 
