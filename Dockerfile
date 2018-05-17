@@ -19,4 +19,7 @@ RUN /usr/bin/easy_install-2.7 pip && \
 
 EXPOSE 8000
 
+# TODO: change to a shell script that execs the process that we want to start
+# This is actually a bad practice - we want the service to be PID 1 to
+# so the container can properly handle unix signals
 CMD ["make", "run"]
