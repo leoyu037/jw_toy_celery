@@ -7,7 +7,6 @@ This is a barebones celery setup. Includes:
 1. Makefile entrypoint for starting worker, beat, flower
 1. Alpine-based Dockerfile
 1. Docker Compose file to build and run the setup locally
-1. (JW Player specific) CICD pipeline configurations for broker, worker, beat, flower (`.cicd`)
 
 -----------
 
@@ -15,7 +14,6 @@ This is a barebones celery setup. Includes:
 
 1. Docker
 1. Docker Compose (preinstalled w/ Docker for Mac)
-1. (For deploying to JW Player CICD) CICD-CLI and a Dockerhub account
 
 ## Starting the application locally
 
@@ -25,14 +23,4 @@ This is a barebones celery setup. Includes:
 
   # Start app
   make run-local
-```
-
-## Deploying to JW Player CICD
-
-```bash
-  # Log in to Dockerhub
-  docker login
-
-  # Build docker image, push to Dockerhub, deploy to CICD
-  make deploy-pipelines version=<version>
 ```
