@@ -7,9 +7,9 @@ services:
 
   toy-celery-worker:
     build: .
-    image: jwplayer/toy-celery:local
-    volumes:
-      - ./:/srv/
+    image: toy-celery:local
+    # volumes:
+    #   - ./:/srv/
     environment:
       - C_FORCE_ROOT=True
       - RUN_MODE=worker
@@ -17,9 +17,9 @@ services:
 
   toy-celery-worker2:
     build: .
-    image: jwplayer/toy-celery:local
-    volumes:
-      - ./:/srv/
+    image: toy-celery:local
+    # volumes:
+    #   - ./:/srv/
     environment:
       - C_FORCE_ROOT=True
       - RUN_MODE=worker
@@ -27,17 +27,17 @@ services:
 
   toy-celery-beat:
     build: .
-    image: jwplayer/toy-celery:local
-    volumes:
-      - ./:/srv/
+    image: toy-celery:local
+    # volumes:
+    #   - ./:/srv/
     environment:
       - RUN_MODE=beat
 
   toy-celery-flower:
     build: .
-    image: jwplayer/toy-celery:local
-    volumes:
-      - ./:/srv/
+    image: toy-celery:local
+    # volumes:
+    #   - ./:/srv/
     environment:
       - RUN_MODE=flower
     ports:
